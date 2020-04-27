@@ -1,0 +1,177 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+
+<head th:replace="/common/header :: common-header" />
+
+
+<body>
+	<div th:replace="/common/header :: navbar" />
+	
+	<div class="container">
+	<div class="row">
+		<form class="form-horizontal" th:action="@{/shoes/add}" method="post" enctype="multipart/form-data">
+		<fieldset>
+			<legend class="center-block">New Shoes Information<span style="font-size:small"> * is a required field</span></legend>
+			  
+			  <!--Brand-->
+			  <div class="form-group">
+				    <label class="col-md-8 control-label" for="brand">* Brand</label>
+			    <div class="col-md-8" >
+			    <input type="text" name="brand" class="form-control" id="brand" placeholder="Brand" th:value="${shoes.brand}" required="required" />
+			    <span class="help-block">Brand of the shoes</span>
+			    </div>
+			  </div>
+			  
+			  
+			  
+			  <!--Model-->
+			  <div class="form-group">
+			    <label class="col-md-8 control-label" for="model">* Model</label>
+			    <div class="col-md-8" >
+			    <input type="text" name="model" class="form-control" id="model" placeholder="Model" th:value="${shoes.model}" required="required" />
+			    <span class="help-block">Model of the shoes</span>
+			    </div>
+			  </div>
+			  
+			  
+			  <!--Country-->
+			  <div class="form-group">
+			    <label class="col-md-8 control-label" for="country">* Country</label>
+			    <div class="col-md-8" >
+			    <input type="text" name="country" class="form-control" id="country" placeholder="Country" th:value="${shoes.country}" required="required" />
+			    <span class="help-block">Country of the shoes</span>
+			    </div>
+			  </div>
+			  
+			 <!--Launch date-->
+			  <div class="form-group">
+			    <label class="col-md-8 control-label" for="LaunchDate">* Launch Date</label>
+			    <div class="col-md-8" >
+			    <input type="date" name="launchDate" class="form-control" id="LaunchDate" placeholder="LaunchDate" th:value="${shoes.LaunchDate}" required="required" />
+			    <span class="help-block">Launch date of the shoes</span>
+			    </div>
+			  </div>
+			 
+			 
+			  <!--Style-->
+			  <div class="form-group">
+			  	<label class="col-md-8 control-label" for="style">* Style</label>
+			  	<div class="col-md-8">
+			  		<select th:value="${shoes.style}" id="style" class="form-control">
+			  			<option value="" selected="selected" disabled="disabled">Please select an option...</option>
+			  			<option value="sneaker">Sneaker Shoes</option>
+			  			<option value="runningShoes">Running Shoes</option>
+			  			<option value="soccerShoes">Soccer Shoes</option>
+			  			<option value="basketballShoes">Basketball Shoes</option>
+			  			<option value="footballShoes">Football Shoes</option>
+			  			<option value="training">Training Shoes</option>
+			  		</select>
+			    </div>
+			  </div>
+			  
+			  <!--Size-->
+			  <div class="form-group">
+			    <label class="col-md-8 control-label" for="size">* Size</label>
+			    <div class="col-md-8">
+			    <input type="number" name="size" class="form-control" id="size" placeholder="Size" th:value="${shoes.size}" required="required" />
+			    <span class="help-block">Size of the shoes</span>
+			    </div>
+			  </div>
+			  
+			  
+			  <!--Shipping weight-->
+			  <div class="form-group">
+			    <label class="col-md-8 control-label" for="shippingWeight">Shipping Weight</label>
+			    <div class="col-md-8">
+				    <div class="input-group">
+				    	<input name="shipWeight" th:value="${shoes.shippingWeight}" type="number" class="form-control" id="shippingWeight" placeholder="Shipping Weight" required="required" />
+				    	<span class="input-group-addon">G</span>
+				    </div>
+				    <span class="help-block">Shipping Weight of the shoes</span>
+			    </div>
+			  </div>
+			  
+			  
+			  <!--List Price-->
+			  <div class="form-group">
+			  <label class="col-md-8 control-label" for="listPrice">List Price</label>
+				    <div class="col-md-8">
+					    <div class="input-group">
+					    <span class="input-group-addon">$</span>
+					    	<input name="listPrice" th:value="${shoes.listPrice}" type="number" class="form-control" id="listPrice" placeholder="List Price" required="required" />
+					    </div>
+					    <span class="help-block">List Price of the shoes</span>
+				    </div>
+				</div>
+			  
+			  <!--Our Price-->
+			  <div class="form-group">
+			  <label class="col-md-8 control-label" for="ourPrice">Our Price</label>
+			  <div class="input-group-prepend">
+			    <div class="col-md-8">
+				    <div class="input-group">
+				    <span class="input-group-addon">$</span>
+				    	<input name="ourPrice" th:value="${shoes.ourPrice}" type="number" class="form-control" id="ourPrice" placeholder="Our Price" required="required" />
+				    </div>
+				    <span class="help-block">Our Price of the shoes</span>
+			    </div>
+			  </div>
+			  </div>
+			  
+			  
+			  <!--In Stock Number-->
+			  <div class="form-group">
+			    <label class="col-md-8 control-label" for="inStockNumber">* In Stock Number</label>
+			    <div class="col-md-8">
+				    <div class="input-group">
+				    	<input name="inStockNumber" th:value="${shoes.ourPrice}" type="number" class="form-control" id="inStockNumber" placeholder="In Stock Price" required="required" />
+				    </div>
+				    <span class="help-block">In Stock Number of the shoes</span>
+			    </div>
+			  </div>
+			  
+			  <!--Status of Shoes-->
+			  <div class="form-group">
+			    <label class="col-md-8 control-label" for="active">* Status of Shoes</label>
+			    	<div class="col-md-8">
+				    	<label><input value="true" type="radio" name="active" class="form-control"/>Active </label>
+				    	<label><input value="false" type="radio" name="active" class="form-control"/>Inactive </label>
+			    	</div>
+			    <span class="help-block">Whether the shoes is active or inactive</span>
+			  </div>
+			  
+			  <!--Description-->
+			  <div class="form-group">
+			    <label class="col-md-8 control-label" for="description">Description</label>
+			    <textarea name="description" rows="S" class="form-control" id="description" th:value="${shoes.description}" placeholder="Description"></textarea>
+			    <span class="help-block">Description of the shoes</span>
+			  </div>
+
+			  <!--upload image-->
+			  <div class="form-group">
+			  	<div class="col-md-8">
+			    	<label for="shoesImage">Upload shoes image</label>
+			    </div>
+			    <div class="col-md-8">
+			    	<input id="shoesImage" type="file" name="shoesImage" th:value="${shoes.shoesImage}" />
+			    </div>
+			  </div>
+			  <div class="form-group">
+			  <div class="col-md-8"></div>
+			  <div class="col-md-8">
+			  <button type="submit" class="btn btn-success">Add Shoes</button>
+			  <a class="btn btn-danger" th:href="@{/}">Cancel</a>
+			  </div>
+			  </div>
+			  
+		</fieldset>
+		</form>
+	</div>
+	</div>
+	
+	<div th:replace="/common/header :: body-bottom-scripts" />
+
+</body>
+</html>
+

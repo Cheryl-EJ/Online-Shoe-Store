@@ -1,0 +1,46 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+
+<head th:replace="/common/header :: common-header" />
+
+
+<body>
+	<div th:replace="/common/header :: navbar" />
+	
+	<div class="container">
+		<div class="table-responsive">
+			<table id="shoesListTable" class="table table-bordered table-hover table-striped">
+				<thead>
+					<tr>
+						<th>Brand</th>
+						<th>Model</th>
+						<th>Size</th>
+						<th>List Price</th>
+						<th>Our Price</th>
+						<th>Active</th>
+						<th>In Stock Number</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="shoes : ${shoesList}">
+						<!--<td><input hidden="hidden" name="id" th:value="${shoes.id}" /></td>-->
+						<td th:text="${shoes.brand}"></td>
+						<td th:text="${shoes.model}"></td>
+						<td th:text="${shoes.size}"></td>
+						<td th:text="${shoes.listPrice}"></td>
+						<td th:text="${shoes.ourPrice}"></td>
+						<td th:text="${shoes.active}"></td>
+						<td th:text="${shoes.inStockNumber}"></td>
+					</tr>
+				</tbody>	
+		</div>
+	</div>
+
+
+
+
+	<div th:replace="/common/header :: body-bottom-scripts" />
+
+</body>
+</html>

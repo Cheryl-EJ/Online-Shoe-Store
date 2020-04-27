@@ -1,0 +1,77 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:fragment="common-header">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--  meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico"-->
+
+<title>TROY SNEAKERS</title>
+
+
+<!-- Bootstrap core CSS -->
+<link href="/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
+
+<link th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+	<div th:fragment="navbar">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+		<a class="navbar-brand" href="#">TROY SNEAKERS</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarsExample09" aria-controls="navbarsExample09"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarsExample09">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="#">HOME
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item">
+					<form class="form-inline">
+						<input class="form-control" type="text" placeholder="Search"
+							aria-label="Search">
+						<button type="submit" class="btn btn-default"
+							style="background-color: white;">Search</button>
+					</form>
+				</li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" th:href="@{/shoesbox}"
+					id="dropdown09" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false">SHOES</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown09">
+						<a class="dropdown-item" th:href="@{/shoesbox}">Browse the shoes</a> <a
+							class="dropdown-item" href="#">Store hours &#38 Direction</a> <a
+							class="dropdown-item" href="#">Contact</a>
+					</div></li>
+			</ul>
+			<ul class="navbar-nav my-2 my-md-0">
+				<li class="nav-item"><a class="nav-link" th:href="@{/shoppingCart/cart}">SHOPPING
+						CART</a></li>
+				<li class="nav-item"><a sec:authorize="isAnonymous()" class="nav-link" th:href="@{/login}">MY
+						ACCOUNT</a></li>
+				<li class="nav-item"><a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/myProfile}">MY
+						ACCOUNT</a></li>
+				<li class="nav-item"><a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/logout}">LOGOUT</a></li>
+
+			</ul>
+
+		</div>
+	</nav>
+	</div>
+	<div th:fragment="body-bottom-scripts">
+		<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+			<script th:src="@{/js/scripts.js}"></script>
+	
+	</div>
+</body>
+</html>

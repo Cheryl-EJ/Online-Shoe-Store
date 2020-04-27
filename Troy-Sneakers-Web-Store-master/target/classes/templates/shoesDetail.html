@@ -1,0 +1,105 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="/common/header :: common-header" />
+
+<body>
+	<div th:replace="/common/header :: navbar"></div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-8">
+				<h2 class="section-headline" style="font-size: 5rem;">
+					<span th:text="${user}? ${#strings.toUpperCase(user.username)} : 'All Shoes'"></span>
+				</h2>
+			</div>
+			<div class="col-4">
+				<img src="/imgs/logo.png" class="img-fluid" />
+			</div>
+		</div>
+		<hr />
+		
+		<form th:action=@{/shoppingCart/addItem} method="post">
+			<input hidden="hidden" th:field="*{shoes.id}"/>
+			<div class="row" style="margin-top:50px;">
+				<div class="col-3">
+					<a th:href="@{/shoesbox}">Back to browse the shoes</a><br/>
+					<img class="img-fluid box-shoes" th:src="#{adminPath}+@{/imgs/shoes/}+${shoes.id}+'.png'"/>
+				</div>
+				<div class="col-9">
+					<h3 th:text="${shoes.model}">Shoes Model</h3>
+					<div class="row">
+						<div class="col-5">
+							<h5><strong>Brand:</strong><span th:text="${shoes.Brand}"></span></h5>
+							<h5><strong>Style:</strong><span th:text="${shoes.Style}"></span></h5>
+							<h5><strong>LaunchDate:</strong><span th:text="${shoes.LaunchDate}"></span></h5>
+							<h5><strong>Shipping Weight</strong><span th:text="${shoes.shippingWeight}"></span> g</h5>
+							
+						</div>
+						<div class="col-7">
+							<div class="card card-default" style="border-width:5px;">
+								<div class="card-body">
+									<div class="row">
+										<div class="col-6">
+											<h4>Our price: <span style="color:#db3208;">$</span><span th:text="${shoes.ourPrice}"></span></h4>
+											<p>List price: <span style="text-decoration:line-through;">$<span th:text="${shoes.listPrice}"></span></span></p>
+											<span>Qty:</span>
+											<select name="qty">
+												<option th:each="qty : ${qtyList}" th:value="${qty}" th:text="${qty}"></option>
+											</select>
+											<span>Size:</span>
+											<select >
+												<option >4</option>
+												<option >4.5</option>
+												<option >5</option>
+												<option >5.5</option>
+												<option >6</option>
+												<option >6.5</option>
+												<option >7</option>
+												<option >7.5</option>
+												<option >8</option>
+												<option >8.5</option>
+												<option >9</option>
+												<option >9.5</option>
+												<option >10</option>
+												<option >10.5</option>
+												<option >11</option>
+											</select>
+										</div>
+										<div class="col-6">
+											<h4 th:if="*{shoes.inStockNumber&gt;10}" style="color:green;">In Stock</h4>
+											<h4 th:if="*{shoes.inStockNumber == 0}" style="color:red;">Out of Stock</h4>
+											<button type="submit" class="btn btn-warning" style="color:black; border:1px solid black; padding: 10px 40px 10px 40px;">Add to Cart</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr />
+					<p><strong><span>Description: </span><span th:text="${shoes.description}"></span></strong></p>
+
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<!--script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+	</script>
+	<  script src="/js/vendor/popper.min.js"></script-->
+	<div th:replace="/common/header :: body-bottom-scripts"></div>
+</body>
+</html>

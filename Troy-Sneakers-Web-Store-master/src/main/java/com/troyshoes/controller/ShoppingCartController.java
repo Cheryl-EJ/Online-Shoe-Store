@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -14,6 +16,7 @@ import com.troyshoes.domain.CartItem;
 import com.troyshoes.domain.Shoes;
 import com.troyshoes.domain.ShoppingCart;
 import com.troyshoes.domain.User;
+import com.troyshoes.repository.ShoesToCartItemRepository;
 import com.troyshoes.service.CartItemService;
 import com.troyshoes.service.ShoesService;
 import com.troyshoes.service.ShoppingCartService;
@@ -71,7 +74,25 @@ public class ShoppingCartController {
 		return "forward:/shoesDetail?id="+shoes.getId();
 	}
 
+	@RequestMapping("/updateCartItem")
+	public String updateShoppingCart(
+			@ModelAttribute("id") Long cartItemId,
+			@ModelAttribute("qty") int qty
+			) {
+		CartItem cartItem = cartItemService.findById(cartItemId);
+		cartItem.setQty(qty);
+		cartItemService.updateCartItem(cartItem);
+		
+		return "forward:/shoppingCart/cart";
+	}
 	
-	
-
+	@RequestMapping("/removeItem")
+	public String removeItem(@RequestParam("id") Long id) {
+		cartItemService.removeCartItem(cartItemService.findById(id));
+		
+		return "forward:/shoppingCart/cart";
+	}
 }
+
+
+

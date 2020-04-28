@@ -36,41 +36,56 @@
 					</div>
 					</div>
 					<div class = "row">
-					<div class = "col-8"><h4>Items</h4></div>
-					<div class = "col-2"><p>Price</p></div>
+					<div class = "col-4"><h4>Items</h4></div>
+					<div class = "col-1"><p>Price</p></div>
 					<div class = "col-2"><p>Quantity</p></div>
 					</div>
 					
 					<!-- display items in cart -->
 					<div class = "row" th:each = "cartItem : ${cartItemList}">
 						<form th:action = "@{/shoppingCart/updateCartItem}" method = "post">
-							<hr/>
-							<div class = "row">
-								<div class = "col-2">
-									<a th:href="@{/shoesDetail?id=}+${cartItem.shoes.id}"><h4 th:text="${cartItem.shoes.model}"></h4></a>
-									<a th:href = "@{shoesDetail(id = ${cartItem.shoes.id})}">
-									<img class = "img-fluid shelf-shoes" th:src = "#{adminPath}+@{/imgs/shoes/}+
-									${cartItem.shoes.id}+'.png'"/>
-									</a>
+									<hr />
+									<div class = "row">
+							<div class="col-2">
+								<a th:href="@{shoesDetail(id=${cartItem.shoes.id})}"> <img
+									style="width:70px;"
+									class="img-responsive box-shoes center-block"
+									th:src="#{adminPath}+@{/imgs/shoes/}+
+								${cartItem.shoes.id}+'.png'" />
+								</a>
+							</div>
+							<div class="col-6">
+								<div style="margin-left:50px;">
+								<a th:href="@{/shoesDetail?id=}+${cartItem.shoes.id}"><h4
+															th:text="${cartItem.shoes.model}"></h4></a>
+													<p th:if="${cartItem.shoes.inStockNumber&gt;10}"
+														style="color: green;">In Stock</p>
+													<p
+														th:if="${cartItem.shoes.inStockNumber&lt;10 and cartItem.shoes.inStockNumber&gt;0}"
+														style="color: green;">
+														Only <span th:text="${cartItem.shoes.inStockNumber}"></span>
+														In Stock
+													</p>
+								<p th:if="${cartItem.shoes.inStockNumber==0}"
+														style="color: darkred;">Product Unavailable</p>
+								<a th:href="@{/shoppingCart/removeItem?id=}+${cartItem.id}">delete</a>
 								</div>
-								
-								<div class = col-6></div>
-								<div class="col-2">
-								
-									<h5 style = "color: #db3208;font-size:Large;">$<span th:text = "${cartItem.shoes.ourPrice}"></span></h5>
-							
-								
-								</div>
-							
-							
-								<div class = "col-2">
-									<input hidden = "hidden" name = "id" th:value = "${cartItem.id}"/>
-									<input th:id = "${cartItem.id}" th:name = "qty" th:disabled = "${cartItem.shoes.inStockNumber == 0}"
-									class = "form-control cartItemQty" th:value = "${cartItem.qty}"/>
-									<button style = "display: none;" th:id = "'update-item-'+ ${cartItem.id}" type = "submit"
-									class = "btn btn-warning btn-xs">Update</button>
-								</div>
-							
+							</div>
+
+							<div class="col-2">
+												<h5 style="color: #db3208; font-size: large;">
+													$<span th:text="${cartItem.shoes.ourPrice}"
+														th:style="${cartItem.shoes.inStockNumber}==0? 'text-decoration: line-through' : ''"></span>
+												</h5>
+											</div>
+
+							<div class="col-2">
+								<input hidden="hidden" name="id" th:value="${cartItem.id}" /> <input
+									th:id="${cartItem.id}" th:name="qty" th:disabled="${cartItem.shoes.inStockNumber==0}" class="form-control cartItemQty" th:value="${cartItem.qty}" />
+								<button style="display: inline;"
+									th:id="'update-item-'+${cartItem.id}" type="submit"
+									class="btn btn-warning btn">Update</button>
+							</div>
 							</div>
 						</form>
 						

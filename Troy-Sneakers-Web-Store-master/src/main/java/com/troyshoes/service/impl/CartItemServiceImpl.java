@@ -72,6 +72,15 @@ public class CartItemServiceImpl implements CartItemService{
 	public CartItem save(CartItem cartItem) {
 		return cartItemRepository.save(cartItem);
 	}
+	
+	public CartItem findById(Long id) {
+		return cartItemRepository.findById(id).get();
+	}
+	
+	public void removeCartItem(CartItem cartItem) {
+		shoesToCartItemRepository.deleteByCartItem(cartItem);
+		cartItemRepository.delete(cartItem);
+	}
 		
 
 }
